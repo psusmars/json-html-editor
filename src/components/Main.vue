@@ -8,8 +8,10 @@
         <h1 class="text-h2 font-weight-bold">J2H2J Editor</h1>
     </v-container>
       <div class="text-body-1 mb-4">To use this application</div>
-      <InputArea/>
-      <v-button @click=""></v-button>
+      <v-textarea :rules="[isValidJSON]" @update:model-value="loadData" v-model="inputData" label="Paste your JSON here..."></v-textarea>
+      <v-btn :disabled="!canLoad" @click="loadData">
+        Load
+      </v-btn>
 
 
       <div class="py-14" />
@@ -20,10 +22,18 @@
 </template>
 
 <script lang="ts" setup>
-import { store } from '@/store.ts'
-import InputArea from './InputArea.vue';
+import { ref } from 'vue';
 
-const loadData = () => {
-  
+const inputData = ref('');
+const canLoad = ref(false);
+
+const isValidJSON = (v: string) => {
+  try {
+    JSON.parse(v);
+    return true;
+  } catch (e) {
+    return false
+  }
 }
+const loadData = (inputValue: string) => canLoad.value = isValidJSON(inputValue)
 </script>
