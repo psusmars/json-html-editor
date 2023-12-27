@@ -1,12 +1,12 @@
 <template>
-  <a-textarea>
-    <!-- Your input area content goes here -->
-  </a-textarea>
+  <a-textarea v-model:value="value" placehold="Paste your JSON here..." :rows="6" a-textarea/>
 </template>
-<script>
+<script setup lang="ts">
+import {ref} from 'vue'
+const value  = ref('')
 
 export default {
-  // Component logic goes here
+  name: 'InputArea',
 }
 </script>
 

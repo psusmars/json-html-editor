@@ -9,13 +9,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ant-design-vue": "^4.0.8",
+    "@mdi/font": "^7.4.47",
+    "core-js": "^3.29.0",
+    "roboto-fontface": "*",
+    "vue-router": "^4.0.0",
+    "vuetify": "^3.0.0",
     "vue": "^3.3.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vue-tsc": "^1.8.25"
+    "vite-plugin-vuetify": "^2.0.1",
+    "vue-tsc": "^1.8.25",
+    "@babel/types": "^7.21.4",
+    "@types/node": "^18.15.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "sass": "^1.60.0",
+    "unplugin-fonts": "^1.0.3",
+    "vuetify": "^3.4.8"
   }
 }
