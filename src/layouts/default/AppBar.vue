@@ -3,7 +3,7 @@
     <v-app-bar-title>
       <v-icon icon="mdi-code-braces-box" />
 
-      JSON -> HTML -> JSON Editor
+      J2H2J Editor
     </v-app-bar-title>
   </v-app-bar>
 </template>
