@@ -18,6 +18,8 @@
           label="Select HTML Key to Adjust" :items="jsonKeys"></v-combobox>
         <v-textarea :focused="!!selectedKey" class="full-width" :disabled="!selectedKey" v-model="loadedHtml"
           label="The HTML to Edit"></v-textarea>
+          <v-textarea class="full-width" v-model="newJSON"
+          label="Output JSON"></v-textarea>
       </div>
 
     </v-responsive>
@@ -26,6 +28,7 @@
 
 <script lang="ts" setup>
 import get from 'lodash/get';
+import set from 'lodash/set';
 import { ref, watchEffect, computed, nextTick } from 'vue';
 
 const isValidJSON = (v: string) => {
@@ -43,9 +46,17 @@ const selectedKey = ref('');
 const canLoad = computed(() => isValidJSON(inputData.value) === true);
 const loadedJSON = computed(() => canLoad.value ? JSON.parse(inputData.value) : '');
 const loadedHtml = ref('');
+const newJSON = ref('');
 
 watchEffect(() => {
   loadedHtml.value = loadedJSON.value ? get(loadedJSON.value, selectedKey.value) : ''
+});
+
+watchEffect(() => {
+  if (!loadedHtml.value) return;
+  const tempJSON = { ...loadedJSON.value};
+  set(tempJSON, selectedKey.value, loadedHtml.value.replace('"', '\"'));
+  newJSON.value = JSON.stringify(tempJSON, null, 2);
 });
 
 const handlePaste = async () => {
