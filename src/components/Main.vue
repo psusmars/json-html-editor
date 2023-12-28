@@ -9,7 +9,7 @@
       </v-container>
       <div class="stack">
         <div class="full-width text-body-1">To use this application</div>
-        <v-textarea class="full-width" :rules="[isValidJSON]" @paste="loadData" v-model="inputData"
+        <v-textarea class="full-width" :rules="[isValidJSON]" @paste="handlePaste" v-model="inputData"
           label="Paste your JSON here..."></v-textarea>
         <v-btn :disabled="!canLoad" @click="loadData">
           Load
@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import get from 'lodash/get';
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, nextTick } from 'vue';
 
 const isValidJSON = (v: string) => {
   try {
@@ -49,6 +49,12 @@ const loadedHtml = ref('');
 watchEffect(() => {
   loadedHtml.value = loadedJSON.value ? get(loadedJSON.value, selectedKey.value) : ''
 });
+
+const handlePaste = async () => {
+  await nextTick();
+  loadData();
+}
+
 const collectKeys = (obj: any, parentKey = '') => {
   let keys: Array<string> = [];
   Object.keys(obj).forEach((key) => {
