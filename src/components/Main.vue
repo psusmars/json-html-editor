@@ -43,9 +43,7 @@ const selectedKey = ref('');
 const canLoad = computed(() => isValidJSON(inputData.value) === true);
 const loadedJSON = computed(() => canLoad.value ? JSON.parse(inputData.value) : '');
 const loadedHtml = ref('');
-// watch(() => ({key: selectedKey.value, json: loadedJSON.value}), (newVal) => {
-//   loadedHtml.value = newVal.json ? get(newVal.json, newVal.key) : ''
-// }, {deep: true});
+
 watchEffect(() => {
   loadedHtml.value = loadedJSON.value ? get(loadedJSON.value, selectedKey.value) : ''
 });
