@@ -7,7 +7,7 @@ const routes = [
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
-        path: '',
+        path: '/json-html-editor/',
         name: 'Home',
         // route level code-splitting
         // this generates a separate chunk (Home-[hash].js) for this route
